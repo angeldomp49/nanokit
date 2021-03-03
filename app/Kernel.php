@@ -1,13 +1,13 @@
 <?php
 namespace App;
 
-require_once( '../vendor/autoload.php' );
-require_once( 'helpers.php' );
-require_once( 'functions.php' );
-require_once( 'routes.php' );
+require_once( '../nanokit/vendor/autoload.php' );
+require_once( '../nanokit/app/helpers.php' );
+require_once( '../nanokit/app/functions.php' );
+require_once( '../nanokit/app/routes.php' );
 
-use MakechTec\Http\HttpRequest;
-use MakechTec\Http\ControllerProcessor;
+use MakechTec\Nanokit\Http\{HttpRequest, Route};
+use MakechTec\Nanokit\Http\ControllerProcessor;
 
 class Kernel{
     public static $request;

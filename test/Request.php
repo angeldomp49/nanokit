@@ -1,6 +1,6 @@
 <?php
 namespace Tests;
-use MakechTec\Nanokit\Http\{ HttpRequest, Route };
+use MakechTec\Nanokit\Http\{ HttpRequest, Route, ControllerProcessor };
 use App\Helpers\H;
 
 class Request implements Testable{
@@ -10,7 +10,8 @@ class Request implements Testable{
     public function run(){
         $request = new HttpRequest();
         $currentRoute = Route::currentRoute( $request );
-        echo( var_dump( $currentRoute ) );
+        //echo( rightPath() );
+        view( 'home', [ 'home' => 'hello world' ] );
     }
 
     public function getTestId(){

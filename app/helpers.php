@@ -1,38 +1,30 @@
 <?php
 namespace App\Helpers;
 
-function view( $name, $params ){
-    extract( $params );
-    H::includeView( $name );
-}
-
-
-
-function rightPath( $resource = "" ){
-
-    H::removeStartSlash( $resource );
-    return H::rootPath() . $resource;
-}
-
 class H{
 
-    public static function includeView( $name ){
-        include( rightPath( 'src/Views/' . $name . '.php' ) );
-    }
 
     public static function rootPath(){
         $fromDiskDir    = __DIR__;
-        $fromRootDir  = 'app/' . __NAMESPACE__;
+        $fromRootDir  = 'app';
+
+        $fromDiskDirEqSlashes = self::equalSlashes( $fromDiskDir, $fromRootDir);
     
-        return str_replace( self::equalSlashes( $fromRootDir, $fromDiskDir), "", $fromDiskDir  );
+        return str_replace( $fromRootDir, "", $fromDiskDir  );
     }
 
-    public static function equalSlashes( $str1 = "", $str2 = "" ){
-        if( preg_match( "/\//", $str1 ) ){
-            return preg_replace( "/\\\\/", "/", $str2 );
+    public static function equalSlashes( $reference = "", $target = "" ){
+        $slashRegex = "/\//";
+        $slash = "/";
+
+        $antiSlashRegex = "/\\\\/";
+        $antiSlash = "\\";
+
+        if( preg_match( $slashRegex, $reference ) ){
+            return preg_replace( $antiSlashRegex, $slash, $target );
         }
-        else if ( preg_match( "/\\\\/", $str1 ) ){
-            return preg_replace( "/\//", "\\", $str2 );
+        else if ( preg_match( $antiSlashRegex, $reference ) ){
+            return preg_replace( $slashRegex, $antiSlash, $target );
         }
     }
 

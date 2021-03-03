@@ -1,0 +1,18 @@
+{
+    "name": "makechtec/nanokit",
+    "require":{
+        "illuminate/database": "*",
+        "phpmailer/phpmailer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPMailer\\PHPMailer\\": "vendor/phpmailer/phpmailer/src",
+            "Illuminate\\Database\\": "vendor/illuminate/database",
+            "MakechTec\\Nanokit\\": "vendor/makechtec/nanokit",
+            "App\\": "src"
+        },
+        "classmap": [
+            "app"
+        ]
+    }
+}

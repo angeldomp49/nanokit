@@ -1,11 +1,12 @@
 <?php
+namespace Tests;
 
 class Test{
 
     private $tests;
 
     public function addTest( $test ){
-        $this->tests[$test->getTestId] = $test;
+        $this->tests[$test->getTestId()] = $test;
     }
 
     public function removeTest( $testId ){
@@ -13,7 +14,7 @@ class Test{
     }
 
     public function runTests(){
-        if( emtpy( $this->test ) ){
+        if( empty( $this->tests ) ){
             return;
         }
         foreach( $this->tests as $test ){

@@ -12,7 +12,8 @@
             "App\\": "src"
         },
         "classmap": [
-            "app"
+            "app",
+            "test"
         ]
     }
 }

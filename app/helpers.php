@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Helpers;
 
 function view( $name, $params ){
     extract( $params );
@@ -13,8 +13,6 @@ function rightPath( $resource = "" ){
     H::removeStartSlash( $resource );
     return H::rootPath() . $resource;
 }
-
-
 
 class H{
 
@@ -38,8 +36,17 @@ class H{
         }
     }
 
+    public static function removeAroundSlashes( $str ){
+        $newStr = "";
+
+        $newStr = self::removeStartSlash( $str );
+        $newStr = self::removeEndSlash( $newStr );
+
+        return $newStr;
+    }
+
     public static function removeStartSlash( $str ){
-        if( self::startSlash( $str ) ){
+        if( self::isStartSlash( $str ) ){
             return substr( $str, 1, strlen( $str ) );
         }
         else{
@@ -47,9 +54,23 @@ class H{
         }
     }
 
-    public static function startSlash( $str ){
+    public static function isStartSlash( $str ){
         $slashRegex = "/^\//";
 
         return ( preg_match( $slashRegex, $str ) ) ? true : false; 
+    }
+
+    public static function removeEndSlash( $str ){
+        if( self::isEndSlash( $str ) ){
+            return substr( $str, 0, strlen( $str ) -1 );
+        }
+        else{
+            return $str;
+        }
+    }
+
+    public static function isEndSlash( $str ){
+        $endSlashRegex = "/\/$/";
+        return ( preg_match( $endSlashRegex, $str ) ) ? true : false;
     }
 }

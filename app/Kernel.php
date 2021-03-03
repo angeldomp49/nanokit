@@ -21,5 +21,3 @@ class Kernel{
         $processor->runControllerFromRoute( self::$currentRoute );
     } 
 }
-
-Kernel::runApplication();

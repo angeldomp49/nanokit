@@ -1,6 +1,8 @@
 <?php
 namespace MakechTec\Nanokit\Http;
 
+use App\Helpers\H;
+
 class Route{
     public const GET = 0;
     public const POST = 1;
@@ -29,6 +31,7 @@ class Route{
         $route->setUri( $uri );
         $route->setClassController( $controller[0] );
         $route->setMethodController( $controller[1] );
+        return $route;
     }
 
     public static function register( Route $route ){
@@ -46,7 +49,10 @@ class Route{
     }
 
     public static function matchRequestRoute( $request, Route $route ){
-        return ( $request->getUri() == $route->getUri() ) ? true : false ;
+        $requestUri = H::removeAroundSlashes( $request->getUri() );
+        $routeUri = H::removeAroundSlashes( $route->getUri() );
+
+        return ( $requestUri == $routeUri ) ? true : false ;
     }
     
     public function getUri(){

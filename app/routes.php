@@ -1,4 +1,4 @@
 <?php
 use MakechTec\Nanokit\Http\Route;
 
-Route::get( '/home', [ HomeController::class, 'home' ] );
+Route::get( '/nanokit/test/', [ HomeController::class, 'home' ] );

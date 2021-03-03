@@ -1,8 +1,9 @@
 <?php
+namespace Tests;
 
 interface Testable{
     function getTestId();
-    function setTestId();
+    function setTestId( $id );
 
     function run();
 }

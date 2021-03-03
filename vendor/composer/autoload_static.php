@@ -63,6 +63,10 @@ class ComposerStaticInit177dbff920c1cce94fb7297cc522276c
         array (
             'Carbon\\' => 7,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -129,7 +133,7 @@ class ComposerStaticInit177dbff920c1cce94fb7297cc522276c
         ),
         'MakechTec\\Nanokit\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/..' . '/makechtec/nanokit',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -158,14 +162,24 @@ class ComposerStaticInit177dbff920c1cce94fb7297cc522276c
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
     public static $classMap = array (
+        'App\\Helpers\\H' => __DIR__ . '/../..' . '/app/helpers.php',
+        'App\\Kernel' => __DIR__ . '/../..' . '/app/Kernel.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Tests\\Request' => __DIR__ . '/../..' . '/test/Request.php',
+        'Tests\\Routing' => __DIR__ . '/../..' . '/test/routing.php',
+        'Tests\\Test' => __DIR__ . '/../..' . '/test/Test.php',
+        'Tests\\Testable' => __DIR__ . '/../..' . '/test/interfaces/Testable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );

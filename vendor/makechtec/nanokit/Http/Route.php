@@ -14,6 +14,8 @@ class Route{
     private $classController;
     private $methodController;
     private $namespaceController;
+    private $paramsNames;
+    private $paramsValues;
     private $parameters;
 
     public static function get( $uri, $controller ){
@@ -42,7 +44,7 @@ class Route{
     public static function currentRoute( HttpRequest $request ){
         foreach (self::$routes as $route){
             if( self::matchRequestRoute( $request, $route ) ){
-                $route->generateParameters( $request );
+                //$route->generateParameters( $request );
                 return $route;
             }
         }
@@ -57,15 +59,55 @@ class Route{
         return ( $requestUri == $routeUri ) ? true : false ;
     }
 
-    public function generateParameters( $request ){
-        $this->parameters = [];
+    public function generateParamsNames(){
+        $names = extractParamsNames( $this->getUri() );
+
+        $this->paramsNames = $names;
     }
 
-    public function UriRegex(){
+    public function generateParamsValues( $request ){
+        $values = extractParamsValues( $request->getUri() );
+        
+        $this->paramsValues = $values;
+    }
+
+    public function generateParameters( $request ){
+
+        $this->generateParamsNames();
+        $this->generateParamsValues( $request );
+
+        $keys = $this->getParamsNames();
+        $values = $this->getParamsValues();
+        
+        $parameters = array_combine( $keys, $values );
+        $this->setParameters( $parameters);
+    }
+
+    public function extractParamsNames( $routeUri ){
+
+        $slugs = H::slugsFromUri( $routeUri );
+        $curlyBracketsRegex = '/\{.*\}/';
+        $paramsNamesWithCurlyBrackets = preg_grep( $curlyBracketsRegex, $slugs );
+        $paramsNames = [];
+
+        foreach ($paramsNamesWithCurlyBrackets as $name ) {
+            $paramsNames[] = H::removeAroundCurlyBrackets( $name );
+        }
+        
+        return $paramsNames;
+    }
+
+    public function extractParamsValues( $ ){
+        
+    }
+
+    public function routeUriRegex( $routeUri ){
         //from {n} to (.*)
-        $pattern = preg_replace( '\/\{(.*)\}\/', '/(.*)/', $this->getUri() );
+        $pattern = preg_replace( '\/\{(.*)\}\/', '/(.*)/', $routeUri );
         //from /x/ to \/x\/
         $pattern = preg_replace( '\/', '\/', $pattern );
+
+        return $pattern;
     }
     
     public function getUri(){
@@ -124,6 +166,26 @@ class Route{
 
     public function setParameters($parameters){
         $this->parameters = $parameters;
+
+        return $this;
+    }
+
+    public function getParamsNames(){
+        return $this->paramsNames;
+    }
+
+    public function setParamsNames($paramsNames){
+        $this->paramsNames = $paramsNames;
+
+        return $this;
+    }
+
+    public function getParamsValues(){
+        return $this->paramsValues;
+    }
+
+    public function setParamsValues($paramsValues){
+        $this->paramsValues = $paramsValues;
 
         return $this;
     }

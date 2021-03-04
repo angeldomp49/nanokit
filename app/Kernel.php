@@ -12,8 +12,10 @@ class Kernel{
     public static function runApplication(){
         $requestEv = new RequestEventRegister();
 
-        $getParams = new GetParams( 4 );
-        $requestEv->register( $getParams );
+        //$getParams = new GetParams( 4 );
+        //$requestEv->register( $getParams );
+        $controllerProcessor = new ControllerProcessor(0);
+        $requestEv->register( $controllerProcessor );
 
         $requestEv->launch();
     }

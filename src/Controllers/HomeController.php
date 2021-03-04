@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 class HomeController{
-    public function home(){
-        view( 'home', [ 'home' => 'hello world' ] );
+    public function home( $usuario ){
+        view( 'home', [ 'home' => 'hello world', 'usuario' => $usuario ] );
     }
 }

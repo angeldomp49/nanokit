@@ -15,6 +15,7 @@ return array(
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'Tests\\ParamsTest' => $baseDir . '/test/ParamsTest.php',
     'Tests\\Request' => $baseDir . '/test/Request.php',
     'Tests\\RouteUriTest' => $baseDir . '/test/RouteUriTest.php',
     'Tests\\Routing' => $baseDir . '/test/routing.php',

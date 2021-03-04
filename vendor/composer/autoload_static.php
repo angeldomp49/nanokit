@@ -178,6 +178,7 @@ class ComposerStaticInit177dbff920c1cce94fb7297cc522276c
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Tests\\ParamsTest' => __DIR__ . '/../..' . '/test/ParamsTest.php',
         'Tests\\Request' => __DIR__ . '/../..' . '/test/Request.php',
         'Tests\\RouteUriTest' => __DIR__ . '/../..' . '/test/RouteUriTest.php',
         'Tests\\Routing' => __DIR__ . '/../..' . '/test/routing.php',

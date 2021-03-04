@@ -13,12 +13,19 @@ class ParamsTest implements EventListener{
         //echo( var_dump( $currentRoute->getParameters() ) );
         //$paramsNames = $currentRoute->extractParamsNames( "/home/{usuario}/dashboard/{telephono}" );
 
-        $toTest = "home/{usuario}/dashboard/{telephono}";
-        $result = null;
+        $testRoute = new Route();
+        $testRoute->setUri( "home/{usuario}/dashboard/{telephono}" );
+        $testRoute->generateSlugs();
+        $testRoute->generateParamsNames();
+        $values = $testRoute->extractParamsValues( "home/123/dashboard/897" );
         
-        $result = $currentRoute->extractParamsNames( $toTest );
+        $testRoute->setParamsValues($values)  ;
+        $keys = $testRoute->getParamsNames();
+        $values = $testRoute->getParamsValues();
+        
+        $parameters = array_combine( $keys, $values );
 
-        echo( var_dump( $result ) );
+        echo( var_dump( $parameters ) );
     }
 
     public function getListenerId(){

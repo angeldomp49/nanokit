@@ -14,6 +14,7 @@ class Route{
     private $classController;
     private $methodController;
     private $namespaceController;
+    private $slugs;
     private $paramsNames;
     private $paramsValues;
     private $parameters;
@@ -60,19 +61,20 @@ class Route{
     }
 
     public function generateParamsNames(){
-        $names = extractParamsNames( $this->getUri() );
+        $names = $this->extractParamsNames( $this->getUri() );
 
         $this->paramsNames = $names;
     }
 
     public function generateParamsValues( $request ){
-        $values = extractParamsValues( $request->getUri() );
+        $values = $this->extractParamsValues( $request->getUri() );
         
         $this->paramsValues = $values;
     }
 
     public function generateParameters( $request ){
 
+        $this->generateSlugs();
         $this->generateParamsNames();
         $this->generateParamsValues( $request );
 
@@ -85,7 +87,7 @@ class Route{
 
     public function extractParamsNames( $routeUri ){
 
-        $slugs = H::slugsFromUri( $routeUri );
+        $slugs = $this->getSlugs();
         $curlyBracketsRegex = '/\{.*\}/';
         $paramsNamesWithCurlyBrackets = preg_grep( $curlyBracketsRegex, $slugs );
         $paramsNames = [];
@@ -97,8 +99,14 @@ class Route{
         return $paramsNames;
     }
 
-    public function extractParamsValues( $ ){
-        
+    public function extractParamsValues( $requestUri ){
+        $requestSlugs = H::slugsFromUri( $requestUri );
+        $difference = array_diff( $requestSlugs, $this->getSlugs() );
+        return $difference;
+    }
+
+    public function generateSlugs(){
+        $this->slugs = H::slugsFromUri( $this->getUri() );
     }
 
     public function routeUriRegex( $routeUri ){
@@ -186,6 +194,16 @@ class Route{
 
     public function setParamsValues($paramsValues){
         $this->paramsValues = $paramsValues;
+
+        return $this;
+    }
+
+    public function getSlugs(){
+        return $this->slugs;
+    }
+
+    public function setSlugs($slugs){
+        $this->slugs = $slugs;
 
         return $this;
     }

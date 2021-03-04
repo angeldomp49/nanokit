@@ -45,7 +45,7 @@ class Route{
     public static function currentRoute( HttpRequest $request ){
         foreach (self::$routes as $route){
             if( self::matchRequestRoute( $request, $route ) ){
-                //$route->generateParameters( $request );
+                $route->generateParameters( $request );
                 return $route;
             }
         }
@@ -53,11 +53,22 @@ class Route{
         throw new Exception( 'Route not found with uri = ' . $request->geturi() );
     }
 
-    public static function matchRequestRoute( $request, Route $route ){
-        $requestUri = H::removeAroundSlashes( $request->getUri() );
+    public function matchRequestRoute( $request, Route $route ){
         $routeUri = H::removeAroundSlashes( $route->getUri() );
+        $requestUri = H::removeAroundSlashes( $request->getUri() );
+        $routeRegex = self::createRegex( $routeUri );
+        $isEqual = preg_match( $routeRegex, $requestUri );
+        return $isEqual;
+    }
 
-        return ( $requestUri == $routeUri ) ? true : false ;
+    public static function createRegex( $routeUri ){
+        $paramNameRegex = '/\{(.*?)\}/';
+        $anyValue = preg_replace( $paramNameRegex,'(.*)', $routeUri );
+        $anyValueAndScapedSlashes = preg_replace( '/\//', '\/', $anyValue );
+
+        $routeUriRegex = '/' . $anyValueAndScapedSlashes . '/';
+
+        return $routeUriRegex;
     }
 
     public function generateParamsNames(){
@@ -107,15 +118,6 @@ class Route{
 
     public function generateSlugs(){
         $this->slugs = H::slugsFromUri( $this->getUri() );
-    }
-
-    public function routeUriRegex( $routeUri ){
-        //from {n} to (.*)
-        $pattern = preg_replace( '\/\{(.*)\}\/', '/(.*)/', $routeUri );
-        //from /x/ to \/x\/
-        $pattern = preg_replace( '\/', '\/', $pattern );
-
-        return $pattern;
     }
     
     public function getUri(){

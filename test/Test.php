@@ -1,12 +1,17 @@
 <?php
 namespace Tests;
+use Tests\Testable;
 
 class Test{
 
     private $tests;
 
     public function addTest( $test ){
+        if(! $test instanceof Testable ){
+            throw new Exception( 'must implements Testable' );
+        }
         $this->tests[$test->getTestId()] = $test;
+        echo( var_dump( $test ) );
     }
 
     public function removeTest( $testId ){

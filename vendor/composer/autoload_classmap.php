@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Helpers\\H' => $baseDir . '/app/helpers.php',
+    'App\\Interfaces\\RequestPublisher\\RequestPublisher' => $baseDir . '/app/interfaces/RequestPublisher.php',
+    'App\\Interfaces\\RequestSubscriber' => $baseDir . '/app/interfaces/RequestSubscriber.php',
     'App\\Kernel' => $baseDir . '/app/Kernel.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
@@ -14,6 +16,7 @@ return array(
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
     'Tests\\Request' => $baseDir . '/test/Request.php',
+    'Tests\\RouteUriTest' => $baseDir . '/test/RouteUriTest.php',
     'Tests\\Routing' => $baseDir . '/test/routing.php',
     'Tests\\Test' => $baseDir . '/test/Test.php',
     'Tests\\Testable' => $baseDir . '/test/interfaces/Testable.php',

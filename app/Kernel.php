@@ -1,8 +1,7 @@
 <?php
 namespace App;
 
-use MakechTec\Nanokit\Http\{HttpRequest, Route};
-use MakechTec\Nanokit\Http\ControllerProcessor;
+use MakechTec\Nanokit\Http\{HttpRequest, Route, RequestEventRegister, ControllerProcessor};
 
 class Kernel{
     public static $request;
@@ -10,10 +9,10 @@ class Kernel{
     public static $globalItems;
 
     public static function runApplication(){
-        self::$request = new HttpRequest();
-        self::$currentRoute = Route::currentRoute( self::$request );
-        $processor = new ControllerProcessor();
+        $requestEv = new RequestEventRegister();
+        $controllerProcessor = new ControllerProcessor( 0 );
+        $requestEv->register( $controllerProcessor );
+        $requestEv->launch();
+    }
 
-        $processor->runControllerFromRoute( self::$currentRoute );
-    } 
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Tests;
 use MakechTec\Nanokit\Http\{ HttpRequest, Route, ControllerProcessor };
-use MakechTec\Nanokit\Http\RequestEventRegister;
+use MakechTec\Nanokit\Http\RequestEvent;
 use App\Helpers\H;
 
 class Request implements Testable{
@@ -9,16 +9,10 @@ class Request implements Testable{
     
 
     public function run(){
-        $requestEventRegister = new RequestEventRegister();
-        //$controllerProcessor = new ControllerProcessor();
+        $requestEventRegister = new RequestEvent();
         $routeUriTest = new RouteUriTest();
-
-        //$controllerProcessor->setListenerId( 0 );
         $routeUriTest->setListenerId( 0 );
-
-        //$requestEventRegister->register( $controllerProcessor );
         $requestEventRegister->register( $routeUriTest );
-
         $requestEventRegister->launch();
     }
 

@@ -1,7 +1,7 @@
 <?php
 namespace MakechTec\Nanokit\Interfaces;
 
-interface EventRegister{
+interface Event{
 
     function launch();
     function register( $listener );

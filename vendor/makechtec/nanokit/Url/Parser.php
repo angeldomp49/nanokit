@@ -1,22 +1,71 @@
 <?php
 namespace MakechTec\Nanokit\Url;
+use MakechTec\Nanokit\Util\H;
 
 class Parser{
 
-    public static function equalSlashes( $reference = "", $target = "" ){
-        $slashRegex = "/\//";
-        $slash = "/";
+    public const START_SLASH_REGEX = '/^\//';
+    public const END_SLASH_REGEX = '/\/$/';
+    public const SLASH_REGEX = '/\//';
+    public const SLASH = '/';
 
-        $antiSlashRegex = "/\\\\/";
-        $antiSlash = "\\";
+    public const ANTI_SLASH_REGEX = '/\\\\/';
+    public const ANTI_SLASH = '\\';
 
-        if( preg_match( $slashRegex, $reference ) ){
-            return preg_replace( $antiSlashRegex, $slash, $target );
+    public const CURLY_BRACKETS_REGEX = '/\{.*\}/';
+    public const START_CURLY_BRACKET_REGEX = '/^\{/';
+    public const END_CURLY_BRACKET_REGEX = '/\}$/';
+
+    public const ROUTE_PARAM_NAME_REGEX = '/\{(.*?)\}/';
+
+    public const ANY_CHAR_ANY_TIMES = '(.*)';
+    public const SLASH_SCAPED = '\/';
+
+    public static function slugsFromUri( $uri ){
+        $result = [];
+        
+        $uri = self::removeAroundSlashes( $uri );
+
+        while( strpos( $uri, self::SLASH ) ){
+
+            $segments   = H::divideString( $uri, self::SLASH );
+            $slugToSave = $segments['first'];
+            $uri       = $segments['second'];
+            array_push( $result, $slugToSave );
         }
-        else if ( preg_match( $antiSlashRegex, $reference ) ){
-            return preg_replace( $slashRegex, $antiSlash, $target );
+
+        array_push( $result, $uri );
+
+        return $result;
+    }
+    
+    public static function rootPath(){
+        $pathFromDisk    = __DIR__;
+        $pathFromRootDirectoryProject  = 'app';
+
+        $pathFromRootDirectoryProjectS = self::equalSlashes( $pathFromDisk, $pathFromRootDirectoryProject);
+    
+        return str_replace( $fromRootDir, "", $fromDiskDir  );
+    }
+
+    public static function equalSlashes( $reference = "", $target = "" ){
+
+        if( preg_match( self::SLASH_REGEX, $reference ) ){
+            return preg_replace( self::ANTI_SLASH_REGEX, self::SLASH, $target );
+        }
+        else if ( preg_match( self::ANTI_SLASH_REGEX, $reference ) ){
+            return preg_replace( self::SLASH_REGEX, self::ANTI_SLASH, $target );
         }
     }
+    
+    public static function createRegexFromRouteUri( $routeUri ){
+        $anyValue = preg_replace( self::ROUTE_PARAM_NAME_REGEX, self::ANY_CHAR_ANY_TIME, $routeUri );
+        $anyValueAndScapedSlashes = preg_replace( self::SLASH_REGEX, self::SLASH_SCAPED, $anyValue );
+        $routeUriRegex = self::SLASH . $anyValueAndScapedSlashes . self::SLASH;
+
+        return $routeUriRegex;
+    }
+
 
     public static function removeAroundSlashes( $str ){
         $newStr = "";
@@ -37,9 +86,7 @@ class Parser{
     }
 
     public static function isStartSlash( $str ){
-        $slashRegex = "/^\//";
-
-        return ( preg_match( $slashRegex, $str ) ) ? true : false; 
+        return ( preg_match( self::START_SLASH_REGEX, $str ) ) ? true : false; 
     }
 
     public static function removeEndSlash( $str ){
@@ -52,8 +99,7 @@ class Parser{
     }
 
     public static function isEndSlash( $str ){
-        $endSlashRegex = "/\/$/";
-        return ( preg_match( $endSlashRegex, $str ) ) ? true : false;
+        return ( preg_match( self::END_SLASH_REGEX, $str ) ) ? true : false;
     }
 
 
@@ -76,9 +122,7 @@ class Parser{
     }
 
     public static function isStartCurlyBracket( $str ){
-        $slashRegex = "/^\{/";
-
-        return ( preg_match( $slashRegex, $str ) ) ? true : false; 
+        return ( preg_match( self::START_CURLY_BRACKET_REGEX, $str ) ) ? true : false; 
     }
 
     public static function removeEndCurlyBracket( $str ){
@@ -91,37 +135,7 @@ class Parser{
     }
 
     public static function isEndCurlyBracket( $str ){
-        $endSlashRegex = "/\}$/";
-        return ( preg_match( $endSlashRegex, $str ) ) ? true : false;
-    }
-
-    public static function divideStr( $str, $divider ){
-        $firstPart   = strstr( $str, $divider, true );
-        $secondPart     = strstr( $str, $divider );
-        $secondPart  = substr( $secondPart, 1, strlen( $secondPart ) );
-
-        return [
-            "first"  => $firstPart,
-            "second" => $secondPart
-        ];
-    }
-
-    public static function slugsFromUri( $uri ){
-        $result = [];
-        
-        $uri = self::removeAroundSlashes( $uri );
-
-        while( strpos( $uri, "/" ) ){
-
-            $segments   = self::divideStr( $uri, "/" );
-            $slugToSave = $segments['first'];
-            $uri       = $segments['second'];
-            array_push( $result, $slugToSave );
-        }
-
-        array_push( $result, $uri );
-
-        return $result;
+        return ( preg_match( self::END_CURLY_BRACKET_REGEX, $str ) ) ? true : false;
     }
 
 }

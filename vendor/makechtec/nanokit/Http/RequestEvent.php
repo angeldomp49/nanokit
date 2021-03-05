@@ -1,9 +1,9 @@
 <?php 
 namespace MakechTec\Nanokit\Http;
 
-use MakechTec\Nanokit\Interfaces\{EventRegister, EventListener};
+use MakechTec\Nanokit\Interfaces\{Event, EventListener};
 
-class RequestEventRegister implements EventRegister{
+class RequestEvent implements Event{
     private $listeners;
     private $request;
 

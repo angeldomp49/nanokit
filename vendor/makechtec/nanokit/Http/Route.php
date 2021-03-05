@@ -1,23 +1,21 @@
 <?php
 namespace MakechTec\Nanokit\Http;
 
-use App\Helpers\H;
+use MakechTec\Nanokit\Url\Parser;
 
 class Route{
     public const GET = 0;
     public const POST = 1;
 
     private static $routes;
+    private static $currentRoute;
 
     private $uri;
     private $requestType;
     private $classController;
     private $methodController;
-    private $namespaceController;
-    private $slugs;
-    private $paramsNames;
-    private $paramsValues;
     private $parameters;
+    private $request;
 
     public static function get( $uri, $controller ){
         $route = self::createRoute( self::GET, $uri, $controller );
@@ -43,82 +41,43 @@ class Route{
     }
 
     public static function currentRoute( HttpRequest $request ){
+
         foreach (self::$routes as $route){
             if( self::matchRequestRoute( $request, $route ) ){
-                $route->generateParameters( $request );
-                return $route;
+                self::initCurrentRoute( $request, $route );
+                return self::$currentRoute;
             }
         }
 
         throw new Exception( 'Route not found with uri = ' . $request->geturi() );
     }
 
-    public function matchRequestRoute( $request, Route $route ){
-        $routeUri = H::removeAroundSlashes( $route->getUri() );
-        $requestUri = H::removeAroundSlashes( $request->getUri() );
-        $routeRegex = self::createRegex( $routeUri );
+    public static function initCurrentRoute( HttpRequest $request, Route $route ){
+        self::$currentRoute = $route;
+        self::$currentRoute->request = $request;
+        self::$currentRoute->generateParameters();
+    }
+
+    public static function matchRequestRoute( HttpRequest $request, Route $route ){
+        $routeUri = Parser::removeAroundSlashes( $route->getUri() );
+        $requestUri = Parser::removeAroundSlashes( $request->getUri() );
+        $routeRegex = Parser::createRegexFromRouteUri( $routeUri );
         $isEqual = preg_match( $routeRegex, $requestUri );
         return $isEqual;
     }
 
-    public static function createRegex( $routeUri ){
-        $paramNameRegex = '/\{(.*?)\}/';
-        $anyValue = preg_replace( $paramNameRegex,'(.*)', $routeUri );
-        $anyValueAndScapedSlashes = preg_replace( '/\//', '\/', $anyValue );
 
-        $routeUriRegex = '/' . $anyValueAndScapedSlashes . '/';
+    public function generateParameters(){
+        $routeSlugs = Parser::slugsFromUri( $this->getUri() );
+        $paramsNames = Parser::paramsNamesFromSlugs( $slugs );
 
-        return $routeUriRegex;
-    }
-
-    public function generateParamsNames(){
-        $names = $this->extractParamsNames( $this->getUri() );
-
-        $this->paramsNames = $names;
-    }
-
-    public function generateParamsValues( $request ){
-        $values = $this->extractParamsValues( $request->getUri() );
+        $requestSlugs = Parser::slugsFromUri( $this->request->getUri() );
+        $paramsValues = array_diff( $requestSlugs, $routeSlugs );
         
-        $this->paramsValues = $values;
-    }
-
-    public function generateParameters( $request ){
-
-        $this->generateSlugs();
-        $this->generateParamsNames();
-        $this->generateParamsValues( $request );
-
-        $keys = $this->getParamsNames();
-        $values = $this->getParamsValues();
-        
-        $parameters = array_combine( $keys, $values );
+        $parameters = array_combine( $paramsNames, $paramsValues );
         $this->setParameters( $parameters);
     }
 
-    public function extractParamsNames( $routeUri ){
-
-        $slugs = $this->getSlugs();
-        $curlyBracketsRegex = '/\{.*\}/';
-        $paramsNamesWithCurlyBrackets = preg_grep( $curlyBracketsRegex, $slugs );
-        $paramsNames = [];
-
-        foreach ($paramsNamesWithCurlyBrackets as $name ) {
-            $paramsNames[] = H::removeAroundCurlyBrackets( $name );
-        }
-        
-        return $paramsNames;
-    }
-
-    public function extractParamsValues( $requestUri ){
-        $requestSlugs = H::slugsFromUri( $requestUri );
-        $difference = array_diff( $requestSlugs, $this->getSlugs() );
-        return $difference;
-    }
-
-    public function generateSlugs(){
-        $this->slugs = H::slugsFromUri( $this->getUri() );
-    }
     
     public function getUri(){
         return $this->uri;
@@ -160,16 +119,6 @@ class Route{
         return $this;
     }
 
-    public function getNamespaceController(){
-        return $this->namespaceController;
-    }
-
-    public function setNamespaceController($namespaceController){
-        $this->namespaceController = $namespaceController;
-
-        return $this;
-    }
-
     public function getParameters(){
         return $this->parameters;
     }
@@ -180,33 +129,4 @@ class Route{
         return $this;
     }
 
-    public function getParamsNames(){
-        return $this->paramsNames;
-    }
-
-    public function setParamsNames($paramsNames){
-        $this->paramsNames = $paramsNames;
-
-        return $this;
-    }
-
-    public function getParamsValues(){
-        return $this->paramsValues;
-    }
-
-    public function setParamsValues($paramsValues){
-        $this->paramsValues = $paramsValues;
-
-        return $this;
-    }
-
-    public function getSlugs(){
-        return $this->slugs;
-    }
-
-    public function setSlugs($slugs){
-        $this->slugs = $slugs;
-
-        return $this;
-    }
 }

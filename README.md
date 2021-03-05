@@ -43,7 +43,15 @@ Then, create a view file in the __src/Views__, and add custom php or html code, 
 
 ### 4. start the development server. ###
 
+
 Open a terminal and enter in your current directory, then use the next command:
+
+`php composer.phar dump-autoload`
+
+This command register all your class files created and remove the requirement of use __include()__ function.
+
+Then use:
+
 
 `php -S localhost:8000 -t public/`
 
@@ -52,3 +60,14 @@ This command start a development server in the localhost with the 8000 port, the
 you should see something like:
 
 <p>hello world</p>
+
+
+## Uri's with parameters ##
+
+For catch *GET* parameters you need register the route defining his names using __curly brackets__.
+
+`Route::get( 'home/{user}/dashboard/{resource}' );`
+
+In your controller you only need receive it like a function parameter.
+
+`public function home( $user, $resource ){`

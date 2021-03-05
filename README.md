@@ -19,23 +19,23 @@ the Route::get() function register a uri and bind this with the controller funct
 
 Go to __src/Controllers__ directory and create a new file with the controller class name like __HomeController__, then define a function that will be called when the registered uri is called. The namespace should be __App\Controllers__.
 
-`<?php
-namespace App\Controllers;
+    <?php
+    namespace App\Controllers;
 
-class HomeController{
-    public function home(){
-        // your code here
+    class HomeController{
+        public function home(){
+            // your code here
+        }
     }
-}
-`
+
 
 3. Redirecting to a view.
 
 use the global function __view()__ for insert a view file inside the controller, this function also supports send parameters like an array.
 
-`public function home(){
-    view( 'home', [ 'firstParam' => 'hello world' ] );
-}`
+    public function home(){
+        view( 'home', [ 'firstParam' => 'hello world' ] );
+    }
 
 Then, create a view file in the __src/Views__, and add custom php or html code, also you can get the sended parameter from the controller.
 

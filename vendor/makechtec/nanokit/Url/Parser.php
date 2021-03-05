@@ -3,6 +3,7 @@ namespace MakechTec\Nanokit\Url;
 use MakechTec\Nanokit\Util\H;
 
 class Parser{
+    public const FROM_ROOT_DIRECTORY_PROJECT = 'vendor/makechtec/nanokit/Url';
 
     public const START_SLASH_REGEX = '/^\//';
     public const END_SLASH_REGEX = '/\/$/';
@@ -20,6 +21,17 @@ class Parser{
 
     public const ANY_CHAR_ANY_TIMES = '(.*)';
     public const SLASH_SCAPED = '\/';
+
+    public static function paramsNamesFromSlugs( $slugs ){
+        $paramsNamesWithCurlyBrackets = preg_grep( self::CURLY_BRACKETS_REGEX, $slugs );
+        $paramsNames = [];
+
+        foreach ($paramsNamesWithCurlyBrackets as $name ) {
+            $paramsNames[] = self::removeAroundCurlyBrackets( $name );
+        }
+
+        return $paramsNames;
+    }
 
     public static function slugsFromUri( $uri ){
         $result = [];
@@ -41,11 +53,9 @@ class Parser{
     
     public static function rootPath(){
         $pathFromDisk    = __DIR__;
-        $pathFromRootDirectoryProject  = 'app';
-
-        $pathFromRootDirectoryProjectS = self::equalSlashes( $pathFromDisk, $pathFromRootDirectoryProject);
+        $pathFromRootDirectoryProjectSameSlashes = self::equalSlashes( $pathFromDisk, self::FROM_ROOT_DIRECTORY_PROJECT);
     
-        return str_replace( $fromRootDir, "", $fromDiskDir  );
+        return str_replace( $pathFromRootDirectoryProjectSameSlashes, "", $pathFromDisk  );
     }
 
     public static function equalSlashes( $reference = "", $target = "" ){
@@ -59,7 +69,7 @@ class Parser{
     }
     
     public static function createRegexFromRouteUri( $routeUri ){
-        $anyValue = preg_replace( self::ROUTE_PARAM_NAME_REGEX, self::ANY_CHAR_ANY_TIME, $routeUri );
+        $anyValue = preg_replace( self::ROUTE_PARAM_NAME_REGEX, self::ANY_CHAR_ANY_TIMES, $routeUri );
         $anyValueAndScapedSlashes = preg_replace( self::SLASH_REGEX, self::SLASH_SCAPED, $anyValue );
         $routeUriRegex = self::SLASH . $anyValueAndScapedSlashes . self::SLASH;
 

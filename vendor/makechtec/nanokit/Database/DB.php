@@ -1,6 +1,7 @@
 <?php
 namespace MakechTec\Nanokit\Database;
 
+use MakechTec\Nanokit\Interfaces\EventListener;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class DB implements EventListener{

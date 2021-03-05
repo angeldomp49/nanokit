@@ -17,9 +17,7 @@ class Kernel{
 
         $dbconnection = new DB(1);
         $requestEv->register( $dbconnection );
-
         
-
         $requestEv->launch();
     }
 

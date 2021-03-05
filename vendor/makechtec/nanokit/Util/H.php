@@ -1,5 +1,5 @@
 <?php
-namespace App\Helpers;
+namespace MakechTec\Nanokit\Util;
 
 class H{
 

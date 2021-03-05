@@ -69,7 +69,7 @@ class Route{
 
     public function generateParameters(){
         $routeSlugs = Parser::slugsFromUri( $this->getUri() );
-        $paramsNames = Parser::paramsNamesFromSlugs( $slugs );
+        $paramsNames = Parser::paramsNamesFromSlugs( $routeSlugs );
 
         $requestSlugs = Parser::slugsFromUri( $this->request->getUri() );
         $paramsValues = array_diff( $requestSlugs, $routeSlugs );

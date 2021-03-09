@@ -67,6 +67,24 @@ class Parser{
             return preg_replace( self::SLASH_REGEX, self::ANTI_SLASH, $target );
         }
     }
+
+    public static function removeSlugOfUri( $uri, $slug ){
+        $uriSlugs = self::slugsFromUri( $uri );
+        $arrSlug = [ self::removeAroundSlashes( $slug ) ];
+
+        $uriWithoutSlug = array_diff( $uriSlugs, $arrSlug );
+        return self::uriFromSlugs( $uriWithoutSlug );
+    }
+
+    public static function uriFromSlugs( $slugs ){
+        $uri = '';
+
+        foreach ($slugs as $slug) {
+            $uri .= $slug . self::SLASH;
+        }
+
+        return self::removeAroundSlashes( $uri );
+    }
     
     public static function createRegexFromRouteUri( $routeUri ){
         $anyValue = preg_replace( self::ROUTE_PARAM_NAME_REGEX, self::ANY_CHAR_ANY_TIMES, $routeUri );

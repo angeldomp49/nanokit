@@ -19,6 +19,10 @@ class Site{
         return self::$site;
     }
 
+    public function setVirtualRequest( HttpRequest $request ){
+        $this->virtualRequest = $request;
+    }
+
     public function updateLocale(){
         setlocale( $this->locale );
         putenv( 'E_LOCAL=' . $this->locale );

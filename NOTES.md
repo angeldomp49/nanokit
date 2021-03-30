@@ -91,3 +91,14 @@ from index to composer.json files map
    luego con este dato busca si existe un archivo de traducción tipo json en la carpeta lang del proyecto,
    si es así busca la cadena de texto solicitada como clave (key) del json,
    si la encuentra muestra el valor (value) del json.
+
+
+
+   para el config::init
+   va a recopilar todos los lenguages permitidos,
+   si el primer slug del a uri coincide con algún lenguaje,
+        poner el lenguaje en el sitio,
+        borrar el primer slug de la uri del sitio,
+    sino, poner el lenguaje por defecto en el sitio.
+
+    en _t buscar el lenguaje del sitio y hacer lo antes visto

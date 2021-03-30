@@ -102,3 +102,7 @@ from index to composer.json files map
     sino, poner el lenguaje por defecto en el sitio.
 
     en _t buscar el lenguaje del sitio y hacer lo antes visto
+
+
+
+    hace falta la documentación

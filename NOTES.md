@@ -48,6 +48,7 @@ for routes config the changes *ok*
 for templates nothing for now
 for translations config the changes
 for Util and Url nothing for now *ok*
+the routing module going to use the same mapping routes for MVC pattern *ok*
 
 
 addition of app/generalsettings, 
@@ -59,3 +60,34 @@ Addition of some functionalities to Logger class
 removed Test module
 Tested the new functionality, 
 from index to composer.json files map
+
+
+   _t( "este es un texto muy simple" );
+
+   _t( "otro texto" );            // "another text"
+
+   en_US.php
+
+   {
+       "este es un texto muy simple": "this is a very simple text"
+   },
+   {
+       "otro texto" : "another text"
+   }
+
+   es_MX.php
+
+   {
+       "este es un texto muy simple": "este es un texto muy simple"
+   },
+   {
+       "otro texto" : "otro texto"
+   }
+
+
+
+   crear una función global que recibe una cadena de texto,
+   luego analiza el idioma actual del sitio,
+   luego con este dato busca si existe un archivo de traducción tipo json en la carpeta lang del proyecto,
+   si es así busca la cadena de texto solicitada como clave (key) del json,
+   si la encuentra muestra el valor (value) del json.

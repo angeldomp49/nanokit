@@ -5,10 +5,10 @@ use MakechTec\Nanokit\Core\Request;
 
 class Site{
     public $request;
-    private $locale;
+    public $lang;
 
     public function __construct(){
         $this->request = new Request();
-        $this->locale = null;
+        $this->lang = DEFAULT_LANGUAGE;
     }
 }

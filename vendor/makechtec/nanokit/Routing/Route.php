@@ -4,6 +4,7 @@ namespace MakechTec\Nanokit\Routing;
 use \Exception;
 use MakechTec\Nanokit\Url\Parser;
 use MakechTec\Nanokit\Core\Request;
+use MakechTec\Nanokit\Util\logger;
 
 class Route{
     public const GET = 0;
@@ -61,9 +62,34 @@ class Route{
     }
 
     public static function matchRequestRoute( Request $request, Route $route ){
+        if( self::isBaseUri( $request->getUri() ) || self::isBaseUri( $route->getUri() ) ){
+            if( self::isBaseUri( $request->getUri() ) && self::isBaseUri( $route->getUri() ) ){
+                Logger::log( $request->getUri() );
+                Logger::log( $route->getUri() );
+                Logger::log( "match both" );
+                return true;
+            }
+            else{
+                Logger::log( $request->getUri() );
+                Logger::log( $route->getUri() );
+                Logger::log( "not match any" );
+                return false;
+            }
+        }
+        else{
+            Logger::log( $request->getUri() );
+            Logger::log( $route->getUri() );
+            Logger::log( "attempt" );
+            return self::searchRoute( $request, $route );
+        }
+    }
+
+    public static function searchRoute( Request $request, Route $route ){
         $routeUri = Parser::removeAroundSlashes( $route->getUri() );
         $requestUri = Parser::removeAroundSlashes( $request->getUri() );
+
         $routeRegex = Parser::createRegexFromRouteUri( $routeUri );
+
         $isEqual = preg_match( $routeRegex, $requestUri );
         return $isEqual;
     }
@@ -78,6 +104,12 @@ class Route{
         
         $parameters = array_combine( $paramsNames, $paramsValues );
         $this->setParameters( $parameters);
+    }
+
+    public static function isBaseUri( $uri ){
+        $case1 = ( $uri == "" );
+        $case2 = ( $uri == "/" );
+        return ( $case1 || $case2 ) ? true : false ;
     }
 
     

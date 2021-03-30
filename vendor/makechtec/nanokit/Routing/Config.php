@@ -4,6 +4,7 @@ namespace MakechTec\Nanokit\Routing;
 use MakechTec\Nanokit\Routing\Route;
 use MakechTec\Nanokit\Core\Site;
 use MakechTec\Nanokit\Core\Interfaces\Initializable;
+use MakechTec\Nanokit\Util\Logger;
 
 class Config implements Initializable{
 

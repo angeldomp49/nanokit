@@ -89,6 +89,9 @@ class Parser{
         $anyValueAndScapedSlashes = preg_replace( self::SLASH_REGEX, self::SLASH_SCAPED, $anyValue );
         $routeUriRegex = self::SLASH . $anyValueAndScapedSlashes . self::SLASH;
 
+        if( $routeUriRegex == "/\//" ){
+            
+        }
         return $routeUriRegex;
     }
 

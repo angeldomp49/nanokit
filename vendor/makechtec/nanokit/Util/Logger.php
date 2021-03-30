@@ -16,4 +16,10 @@ class Logger {
     public static function err( $message ){
         trigger_error( $message );
     }
+
+    public static function logBool( $statement ){
+        ?>
+        <p><?php echo( ( $statement ) ? "true" : "false" ); ?></p>
+        <?php
+    }
 }

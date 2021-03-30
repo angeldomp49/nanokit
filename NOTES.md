@@ -56,3 +56,4 @@ creation of Core with the essential code, like Request, Site and interfaces for 
 use of Config::init function for initialize each module
 changes in controllerProcessor for Config class and rename Http to Route then Routing.
 Addition of some functionalities to Logger class
+removed Test module

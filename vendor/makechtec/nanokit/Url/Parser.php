@@ -166,6 +166,12 @@ class Parser{
         return ( preg_match( self::END_CURLY_BRACKET_REGEX, $str ) ) ? true : false;
     }
 
+    public static function removeAroundChars( $str, $startChar, $endChar ){
+        $newStr = self::removeStartChar( $str ,$startChar );
+        $newStr = self::removeEndChar( $newStr, $endChar );
+        return $newStr;
+    }
+
     public static function removeStartChar( $str, $firstChar ){
 
         $regex = self::regexStartChar( $firstChar );

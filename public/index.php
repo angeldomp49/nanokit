@@ -5,6 +5,9 @@ require_once( '../app/routes.php' );
 include_once( '../app/eloquent/dbsettings.php' );
 require_once( '../app/Kernel.php' );
 
-use App\Kernel;
+use MakechTec\Nanokit\Url\Parser;
+use MakechTec\Nanokit\Util\Logger;
 
-Kernel::runApplication();
+$test = "{this is a test}";
+Logger::p( Parser::removeAroundChars( $test, "{", "}" ) );
+

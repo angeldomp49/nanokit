@@ -18,7 +18,6 @@ class Config implements Initializable{
             Translation::$lang = $first;
             $newUri = Parser::removeFirstSlug( $site->request->getUri() );
             $site->request->setUri( $newUri );
-            echo("no");
         }
         else{
             $site->lang = DEFAULT_LANGUAGE;

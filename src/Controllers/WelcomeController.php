@@ -7,4 +7,9 @@ class WelcomeController{
             'content' => 'Welcome to Nanokit'
          ] );
     }
+    public function home(){
+        view( 'welcome', [ 
+            'content' => 'fasddsfsfa'
+         ] );
+    }
 }

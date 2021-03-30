@@ -1,16 +1,18 @@
 <?php
-namespace MakechTec\Nanokit\Translations;
+namespace MakechTec\Nanokit\Translation;
+
+use \SplFileObject;
+use MakechTec\Nanokit\Util\Logger;
 
 class Translation{
     public static $lang;
 
     public static function translate( $message ){
         $currentLang = self::$lang;
-        $langFileName = "lang/" . $currentLang . ".php";
+        $langFileName = "lang/" . $currentLang . ".json";
         $langFileName = rightPath( $langFileName );
     
         $stringsArray = self::arrayFromJsonFile( $langFileName );
-
         if( empty( $stringsArray ) ){
             echo( $message );
         }
@@ -27,16 +29,18 @@ class Translation{
         else{
             $langFile = new SplFileObject( $fileName );
             $langFileContent = $langFile->fread( $langFile->getSize() );
-            $langArr = json_decode( $langFileContent ); 
+            $langArr = json_decode( $langFileContent, true ); 
             return $langArr;
         }
     }
 
     public static function translatedString( $message, $stringsArray ){
-        foreach ($stringsArrat as $key => $value) {
-            if( strcmp( $message, $key ) ){
-                echo( $value );
-                return;
+        foreach ($stringsArray as $item) {
+            foreach ($item as $key => $value) {
+                if( $message == $key ){
+                    echo( $value );
+                    return;
+                }
             }
         }
 

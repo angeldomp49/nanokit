@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo( $content ); ?>
+    <?php _t( "otra string" ); ?>
 </body>
 </html>

@@ -5,17 +5,15 @@ use MakechTec\Nanokit\Util\H;
 class Parser{
     public const FROM_ROOT_DIRECTORY_PROJECT = 'vendor/makechtec/nanokit/Url';
 
-    public const START_SLASH_REGEX = '/^\//';
-    public const END_SLASH_REGEX = '/\/$/';
     public const SLASH_REGEX = '/\//';
     public const SLASH = '/';
 
     public const ANTI_SLASH_REGEX = '/\\\\/';
     public const ANTI_SLASH = '\\';
 
+    public const CURLY_BRACKET_OPEN = '{';
+    public const CURLY_BRACKET_CLOSE = '}';
     public const CURLY_BRACKETS_REGEX = '/\{.*\}/';
-    public const START_CURLY_BRACKET_REGEX = '/^\{/';
-    public const END_CURLY_BRACKET_REGEX = '/\}$/';
 
     public const ROUTE_PARAM_NAME_REGEX = '/\{(.*?)\}/';
 
@@ -40,7 +38,7 @@ class Parser{
 
         while( strpos( $uri, self::SLASH ) ){
 
-            $segments   = H::divideString( $uri, self::SLASH );
+            $segments   = self::divideString( $uri, self::SLASH );
             $slugToSave = $segments['first'];
             $uri       = $segments['second'];
             array_push( $result, $slugToSave );
@@ -97,73 +95,14 @@ class Parser{
 
     public static function removeAroundSlashes( $str ){
         $newStr = "";
-
-        $newStr = self::removeStartSlash( $str );
-        $newStr = self::removeEndSlash( $newStr );
-
+        $newStr = self::removeAroundChars( $str, self::SLASH, self::SLASH );
         return $newStr;
     }
-
-    public static function removeStartSlash( $str ){
-        if( self::isStartSlash( $str ) ){
-            return substr( $str, 1, strlen( $str ) );
-        }
-        else{
-            return $str;
-        }
-    }
-
-    public static function isStartSlash( $str ){
-        return ( preg_match( self::START_SLASH_REGEX, $str ) ) ? true : false; 
-    }
-
-    public static function removeEndSlash( $str ){
-        if( self::isEndSlash( $str ) ){
-            return substr( $str, 0, strlen( $str ) -1 );
-        }
-        else{
-            return $str;
-        }
-    }
-
-    public static function isEndSlash( $str ){
-        return ( preg_match( self::END_SLASH_REGEX, $str ) ) ? true : false;
-    }
-
 
     public static function removeAroundCurlyBrackets( $str ){
         $newStr = "";
-
-        $newStr = self::removeStartCurlyBracket( $str );
-        $newStr = self::removeEndCurlyBracket( $newStr );
-
+        $newStr = self::removeAroundChars( $str, self::CURLY_BRACKET_OPEN, self::CURLY_BRACKET_CLOSE );
         return $newStr;
-    }
-
-    public static function removeStartCurlyBracket( $str ){
-        if( self::isStartCurlyBracket( $str ) ){
-            return substr( $str, 1, strlen( $str ) );
-        }
-        else{
-            return $str;
-        }
-    }
-
-    public static function isStartCurlyBracket( $str ){
-        return ( preg_match( self::START_CURLY_BRACKET_REGEX, $str ) ) ? true : false; 
-    }
-
-    public static function removeEndCurlyBracket( $str ){
-        if( self::isEndCurlyBracket( $str ) ){
-            return substr( $str, 0, strlen( $str ) -1 );
-        }
-        else{
-            return $str;
-        }
-    }
-
-    public static function isEndCurlyBracket( $str ){
-        return ( preg_match( self::END_CURLY_BRACKET_REGEX, $str ) ) ? true : false;
     }
 
     public static function removeAroundChars( $str, $startChar, $endChar ){
@@ -226,6 +165,17 @@ class Parser{
 
     public static function removeLast( $str ){
         return substr( $str, 0, strlen( $str ) - 1 );
+    }
+
+    public static function divideString( $str, $divider ){
+        $firstPart   = strstr( $str, $divider, true );
+        $secondPart     = strstr( $str, $divider );
+        $secondPart  = substr( $secondPart, 1, strlen( $secondPart ) );
+
+        return [
+            "first"  => $firstPart,
+            "second" => $secondPart
+        ];
     }
 
 }

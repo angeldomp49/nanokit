@@ -64,22 +64,13 @@ class Route{
     public static function matchRequestRoute( Request $request, Route $route ){
         if( self::isBaseUri( $request->getUri() ) || self::isBaseUri( $route->getUri() ) ){
             if( self::isBaseUri( $request->getUri() ) && self::isBaseUri( $route->getUri() ) ){
-                Logger::log( $request->getUri() );
-                Logger::log( $route->getUri() );
-                Logger::log( "match both" );
                 return true;
             }
             else{
-                Logger::log( $request->getUri() );
-                Logger::log( $route->getUri() );
-                Logger::log( "not match any" );
                 return false;
             }
         }
         else{
-            Logger::log( $request->getUri() );
-            Logger::log( $route->getUri() );
-            Logger::log( "attempt" );
             return self::searchRoute( $request, $route );
         }
     }

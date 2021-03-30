@@ -1,16 +1,10 @@
 <?php 
-namespace MakechTec\Nanokit\Http;
+namespace MakechTec\Nanokit\Request;
 
-use MakechTec\Nanokit\Interfaces\{Event, EventListener};
+use MakechTec\Nanokit\Request\{Event, EventListener};
 
 class RequestEvent implements Event{
     private $listeners;
-    private $request;
-
-    public function launch(){
-        $this->request = new HttpRequest();
-        $this->notifyEvent();
-    }
 
     public function register( $listener ){
         $this->isListener( $listener );
@@ -26,13 +20,7 @@ class RequestEvent implements Event{
             return;
         }
         foreach ($this->listeners as $key => $value) {
-            $value->handleEvent( $this->request );
-        }
-    }
-
-    public function isListener( $listener ){
-        if(! $listener instanceof EventListener ){
-            throw new \Exception( 'must implements EventListener' );
+            $value->handle( $this );
         }
     }
 
@@ -42,16 +30,6 @@ class RequestEvent implements Event{
 
     public function setListeners($listeners){
         $this->listeners = $listeners;
-
-        return $this;
-    }
-
-    public function getRequest(){
-        return $this->request;
-    }
-
-    public function setRequest($request){
-        $this->request = $request;
 
         return $this;
     }

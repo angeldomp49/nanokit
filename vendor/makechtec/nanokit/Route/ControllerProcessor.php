@@ -1,15 +1,9 @@
 <?php
 namespace MakechTec\Nanokit\Http;
 
-use MakechTec\Nanokit\Interfaces\EventListener;
-use MakechTec\Nanokit\Http\Route;
+use MakechTec\Nanokit\Route\Route;
 
-class ControllerProcessor implements EventListener{
-    private $listenerId;
-
-    public function __construct( $listenerId ){
-        $this->listenerId = $listenerId;
-    }
+class ControllerProcessor{
 
     public function handleEvent( $request ){
         $currentRoute = Route::currentRoute( $request );

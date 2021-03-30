@@ -1,7 +1,7 @@
 <?php
-namespace MakechTec\Nanokit\Site;
+namespace MakechTec\Nanokit\Core\Interfaces;
 
-use MakechTec\Nanokit\Site\Site;
+use MakechTec\Nanokit\Core\Site;
 
 interface Initializable{
     public static function init( Site &$site );

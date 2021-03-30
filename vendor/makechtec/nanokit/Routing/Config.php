@@ -7,7 +7,7 @@ use MakechTec\Nanokit\Core\Interfaces\Initializable;
 
 class Config implements Initializable{
 
-    public function init( Site &$site ){
+    public static function init( Site &$site ){
         $currentRoute = Route::currentRoute( $site->request );
         $classController = $currentRoute->getClassController();
         $methodController = $currentRoute->getMethodController();

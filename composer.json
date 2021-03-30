@@ -10,10 +10,6 @@
             "Illuminate\\Database\\": "vendor/illuminate/database",
             "MakechTec\\Nanokit\\": "vendor/makechtec/nanokit",
             "App\\": "src"
-        },
-        "classmap": [
-            "app",
-            "tests"
-        ]
+        }
     }
 }

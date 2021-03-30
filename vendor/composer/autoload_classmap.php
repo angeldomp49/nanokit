@@ -11,13 +11,6 @@ return array(
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-    'Tests\\GetParams' => $baseDir . '/tests/GetParams.php',
-    'Tests\\ParamsTest' => $baseDir . '/tests/ParamsTest.php',
-    'Tests\\Request' => $baseDir . '/tests/Request.php',
-    'Tests\\RouteUriTest' => $baseDir . '/tests/RouteUriTest.php',
-    'Tests\\Routing' => $baseDir . '/tests/routing.php',
-    'Tests\\Test' => $baseDir . '/tests/Test.php',
-    'Tests\\UriWithParams' => $baseDir . '/tests/UriWithParams.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

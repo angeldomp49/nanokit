@@ -6,7 +6,7 @@ use MakechTec\Nanokit\Util\Logger;
 
 class Kernel{
 
-    private static $modules;
+    public static $modules;
 
     public static function main(){
         $site = new Site();
@@ -16,30 +16,31 @@ class Kernel{
         self::loadModules( $site );
     }
 
-    public static function openModulesFiles( $modulesFile ){
+    public static function openModulesFile( $modulesFile ){
         if( !file_exists( $modulesFile ) ){
             Logger::err( "Failed loading modules file not exists: " . $modulesFile );
         }
         else{
-            $this->modules = include( $modulesFile );
+            self::$modules = include( $modulesFile );
         }
     }
 
     public static function loadModules( Site &$site ){
 
-        if( empty( $this->modules ) ){
+        if( empty( self::$modules ) ){
             return;
         }
         
-        foreach ($this->modules as $module ) {
+        foreach (self::$modules as $module ) {
             $completeName = 'MakechTec\\Nanokit\\' . $module;
-            $initializer = $completeName . '\\' . 'Config::init';
+            $initializer = $completeName . '\\' . 'Config';
+            $method = "init";
 
-            if( !function_exists( $initializer ) ){
-                Logger::err( "Error loading module: " . $initializer . " function not exists." );
+            if( !method_exists( $initializer, $method ) ){
+                Logger::err( "Error loading module: " . $initializer. "::". $method . " function not exists." );
             }
             else{
-                call_user_func_array( $initializer, [ $site ] );
+                $initializer::$method( $site );
             }
         }
     }

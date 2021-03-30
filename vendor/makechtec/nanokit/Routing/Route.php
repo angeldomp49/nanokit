@@ -1,7 +1,9 @@
 <?php
 namespace MakechTec\Nanokit\Routing;
 
+use \Exception;
 use MakechTec\Nanokit\Url\Parser;
+use MakechTec\Nanokit\Core\Request;
 
 class Route{
     public const GET = 0;
@@ -40,7 +42,7 @@ class Route{
         self::$routes[] = $route;
     }
 
-    public static function currentRoute( HttpRequest $request ){
+    public static function currentRoute( Request $request ){
 
         foreach (self::$routes as $route){
             if( self::matchRequestRoute( $request, $route ) ){
@@ -52,13 +54,13 @@ class Route{
         throw new Exception( 'Route not found with uri = ' . $request->geturi() );
     }
 
-    public static function initCurrentRoute( HttpRequest $request, Route $route ){
+    public static function initCurrentRoute( Request $request, Route $route ){
         self::$currentRoute = $route;
         self::$currentRoute->request = $request;
         self::$currentRoute->generateParameters();
     }
 
-    public static function matchRequestRoute( HttpRequest $request, Route $route ){
+    public static function matchRequestRoute( Request $request, Route $route ){
         $routeUri = Parser::removeAroundSlashes( $route->getUri() );
         $requestUri = Parser::removeAroundSlashes( $request->getUri() );
         $routeRegex = Parser::createRegexFromRouteUri( $routeUri );

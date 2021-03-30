@@ -174,13 +174,6 @@ class ComposerStaticInit177dbff920c1cce94fb7297cc522276c
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-        'Tests\\GetParams' => __DIR__ . '/../..' . '/tests/GetParams.php',
-        'Tests\\ParamsTest' => __DIR__ . '/../..' . '/tests/ParamsTest.php',
-        'Tests\\Request' => __DIR__ . '/../..' . '/tests/Request.php',
-        'Tests\\RouteUriTest' => __DIR__ . '/../..' . '/tests/RouteUriTest.php',
-        'Tests\\Routing' => __DIR__ . '/../..' . '/tests/routing.php',
-        'Tests\\Test' => __DIR__ . '/../..' . '/tests/Test.php',
-        'Tests\\UriWithParams' => __DIR__ . '/../..' . '/tests/UriWithParams.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );

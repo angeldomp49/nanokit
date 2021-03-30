@@ -1,5 +1,5 @@
 <?php
-use MakechTec\Nanokit\Http\Route;
+use MakechTec\Nanokit\Routing\Route;
 use App\Controllers\HomeController;
 use App\Controllers\WelcomeController;
 

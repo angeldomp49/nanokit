@@ -10,6 +10,13 @@
             "Illuminate\\Database\\": "vendor/illuminate/database",
             "MakechTec\\Nanokit\\": "vendor/makechtec/nanokit",
             "App\\": "src"
-        }
+        },
+        "files": [
+            "vendor/makechtec/nanokit/Util/functions.php",
+            "app/generalsettings.php",
+            "app/modules.php",
+            "app/dbsettings.php",
+            "app/routes.php"
+        ]
     }
 }

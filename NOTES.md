@@ -57,3 +57,4 @@ use of Config::init function for initialize each module
 changes in controllerProcessor for Config class and rename Http to Route then Routing.
 Addition of some functionalities to Logger class
 removed Test module
+Tested the new functionality, 

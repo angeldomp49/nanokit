@@ -9,6 +9,6 @@ class Site{
 
     public function __construct(){
         $this->request = new Request();
-        $this->lang = DEFAULT_LANGUAGE;
+        $this->lang = null;
     }
 }

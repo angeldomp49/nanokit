@@ -14,15 +14,5 @@ function rightPath( $resource = "" ){
 }
 
 function _t( $message ){
-    $currentLang = Translation::$lang;
-    $langFile = "lang/" . $currentLang . ".php";
-    $langFile = rightPath( $langFile );
-
-    if( !file_exists( $langFile ) ){
-        Logger::err( "Language file not found for: " . $currentLang );
-        echo( $message );
-    }
-    else{
-        $f 
-    }
+    Translation::translate( $message );
 }

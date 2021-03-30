@@ -58,3 +58,4 @@ changes in controllerProcessor for Config class and rename Http to Route then Ro
 Addition of some functionalities to Logger class
 removed Test module
 Tested the new functionality, 
+from index to composer.json files map

@@ -166,4 +166,60 @@ class Parser{
         return ( preg_match( self::END_CURLY_BRACKET_REGEX, $str ) ) ? true : false;
     }
 
+    public static function removeStartChar( $str, $firstChar ){
+
+        $regex = self::regexStartChar( $firstChar );
+
+        if( preg_match_all( $regex, $str ) ){
+            return self::removeFirst( $str );
+        }
+        else{
+            return $str;
+        }
+    }
+
+    public static function removeEndChar( $str, $endChar ){
+
+        $regex = self::regexEndChar( $endChar );
+
+        if( preg_match_all( $regex, $str ) ){
+            return self::removeLast( $str );
+        }
+        else{
+            return $str;
+        }
+    }
+
+    public static function regexStartChar( $character ){
+        if ( ctype_alpha( $character ) ) {
+            $regex = "/^" . $character . "/";
+        } 
+        else {
+            $regex = "/^\\" . $character . "/";
+        }
+
+        return $regex;
+        
+    }
+
+    public static function regexEndChar( $character ){
+        if ( ctype_alpha( $character ) ) {
+            $regex = "/" . $character . "$/";
+        } 
+        else {
+            $regex = "/\\" . $character . "$/";
+        }
+
+        return $regex;
+        
+    }
+
+    public static function removeFirst( $str ){
+        return substr( $str, 1, strlen( $str ) );
+    }
+
+    public static function removeLast( $str ){
+        return substr( $str, 0, strlen( $str ) - 1 );
+    }
+
 }

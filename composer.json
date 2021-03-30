@@ -14,7 +14,6 @@
         "files": [
             "vendor/makechtec/nanokit/Util/functions.php",
             "app/generalsettings.php",
-            "app/modules.php",
             "app/dbsettings.php",
             "app/routes.php"
         ]

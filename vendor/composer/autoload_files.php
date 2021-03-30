@@ -18,7 +18,6 @@ return array(
     '72579e7bd17821bb1321b87411366eae' => $vendorDir . '/illuminate/support/helpers.php',
     'cd29d36f6e00cd62c50cc7cd6f667365' => $vendorDir . '/makechtec/nanokit/Util/functions.php',
     'b7b2704ff7acf6e75ad5700f12f9c14e' => $baseDir . '/app/generalsettings.php',
-    '53db4dc71d0f6e8d42eedd1c33cc14ef' => $baseDir . '/app/modules.php',
     '4645026d8d46a6609475d8ed16459c4f' => $baseDir . '/app/dbsettings.php',
     '8d4a552d2eb6f78c9c9f121890db9ae1' => $baseDir . '/app/routes.php',
 );

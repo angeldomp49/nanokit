@@ -1,19 +1,35 @@
 <?php
-namespace MakechTec\Nanokit\Translations;
+namespace MakechTec\Nanokit\Translation;
 
 use MakechTec\Nanokit\Core\Site;
+use MakechTec\Nanokit\Url\Parser;
 use MakechTec\Nanokit\Core\Interfaces\Initializable;
 
 class Config implements Initializable{
 
     public static function init( Site &$site ){
         $slugs = Parser::slugsFromUri( $site->request->getUri() );
-        $lang = $slugs[0];
-        $site->lang = $lang;
-        Translation::$lang = $lang;
+        $first = $slugs[0];
 
-        unset( $slugs[0] );
-        $newUri = Parser::uriFromSlugs( $slugs );
-        $site->request->setUri( $newUri );
+        if( self::isLang( $first ) ){
+            $site->lang = $first;
+            $newUri = Parser::removeFirstSlug( $site->request->getUri() );
+            $site->request->setUri( $newUri );
+        }
+        else{
+            $site->lang = DEFAULT_LANGUAGE;
+        }
+    }
+
+    public static function isLang( $slug ){
+        $langsAllowed = include( rightPath( 'app/translations.php' ) );
+
+        foreach ($langsAllowed as $allow ) {
+            if( strcmp( $allow, $slug ) ){
+                return true;
+            }
+        }
+        return false;
+
     }
 }

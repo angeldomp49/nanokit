@@ -92,7 +92,6 @@ class Parser{
         return $routeUriRegex;
     }
 
-
     public static function removeAroundSlashes( $str ){
         $newStr = "";
         $newStr = self::removeAroundChars( $str, self::SLASH, self::SLASH );
@@ -176,6 +175,21 @@ class Parser{
             "first"  => $firstPart,
             "second" => $secondPart
         ];
+    }
+
+    public static function removeFirstSlug( $uri ){
+        $slugs = self::slugsFromUri( $uri );
+        unset( $slugs[0] );
+        $newUri = self::uriFromSlugs( $slugs );
+        return $newUri;
+    }
+
+    public static function removeLastSlug( $uri ){
+        $slugs = self::slugsFromUri( $uri );
+        $i = count( $slugs ) - 1;
+        unset( $slugs[$i] );
+        $newUri = self::uriFromSlugs( $slugs );
+        return $newUri;
     }
 
 }

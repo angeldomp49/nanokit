@@ -2,12 +2,11 @@
 require_once( '../vendor/autoload.php' );
 require_once( '../vendor/makechtec/nanokit/Util/functions.php' );
 require_once( '../app/routes.php' );
-include_once( '../app/eloquent/dbsettings.php' );
-require_once( '../app/Kernel.php' );
+include_once( '../app/dbsettings.php' );
+include_once( '../app/generalsettings.php' );
 
-use MakechTec\Nanokit\Url\Parser;
-use MakechTec\Nanokit\Util\Logger;
+use MakechTec\Nanokit\Core\Kernel;
 
-$test = "{this is a test}";
-Logger::p( Parser::removeAroundChars( $test, "{", "}" ) );
+Kernel::main();
+
 

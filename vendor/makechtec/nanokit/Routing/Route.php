@@ -1,5 +1,5 @@
 <?php
-namespace MakechTec\Nanokit\Http;
+namespace MakechTec\Nanokit\Routing;
 
 use MakechTec\Nanokit\Url\Parser;
 

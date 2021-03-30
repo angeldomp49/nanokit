@@ -1,7 +1,7 @@
 <?php
-namespace MakechTec\Nanokit\Site;
+namespace MakechTec\Nanokit\Core;
 
-use MakechTec\Nanokit\Request\Request;
+use MakechTec\Nanokit\Core\Request;
 
 class Site{
     public $request;
@@ -9,5 +9,6 @@ class Site{
 
     public function __construct(){
         $this->request = new Request();
+        $this->locale = null;
     }
 }

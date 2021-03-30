@@ -30,6 +30,7 @@ app/                        __for development__
     routes.php
     translations.php
     modules.php
+    generalsettings.php
     tests/
         test1.php
         test2.php
@@ -40,10 +41,18 @@ README.md
 
 
 
-the eloquent dir going to be moved to database module, 
-for the request publish subscribe pattern files will be removed,
-for mail we going to use strategy pattern for emails with data forms.
-for routes config the changes
+the eloquent dir going to be moved to database module,  *ok*
+for the request publish subscribe pattern files will be removed,  *ok*
+for mail we going to use strategy pattern for emails with data forms.  
+for routes config the changes *ok*
 for templates nothing for now
 for translations config the changes
-for Util and Url nothing for now
+for Util and Url nothing for now *ok*
+
+
+addition of app/generalsettings, 
+kernel has been moved to Core/Kernel
+creation of Core with the essential code, like Request, Site and interfaces for strategy pattern
+use of Config::init function for initialize each module
+changes in controllerProcessor for Config class and rename Http to Route then Routing.
+Addition of some functionalities to Logger class

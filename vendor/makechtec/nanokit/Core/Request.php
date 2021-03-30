@@ -1,7 +1,7 @@
 <?php 
-namespace MakechTec\Nanokit\Request;
+namespace MakechTec\Nanokit\Core;
 
-class Request extends RequestEvent{
+class Request{
 
     private $serverAddress       ;
     private $serverName          ;

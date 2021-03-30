@@ -2,14 +2,18 @@
 namespace MakechTec\Nanokit\Util;
 
 class Logger {
-    public static function p( $message ){
+    public static function log( $message ){
         ?>
             <p><?php echo( $message ); ?></p>
         <?php
     }
-    public static function pDump( $message ){
+    public static function logDump( $message ){
         ?>
             <p><?php echo( $message ); ?></p>
         <?php
+    }
+
+    public static function err( $message ){
+        trigger_error( $message );
     }
 }

@@ -11,6 +11,5 @@
         <input type="text" name="name" id="name">
         <button type="submit">Send</button>
     </form>
-    <?php include(""); ?>
 </body>
 </html>

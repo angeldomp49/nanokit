@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php _t( "otra string" ); ?>
+    <form  method="post">
+        <input type="text" name="name" id="name">
+        <button type="submit">Send</button>
+    </form>
+    <?php include(""); ?>
 </body>
 </html>

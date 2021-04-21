@@ -3,15 +3,15 @@ namespace MakechTec\Nanokit\Mail;
 
 class EmailOrder{
 
-    private $host;
-    private $userName;
-    private $password;
-    private $fromName;
-    private $subject;
-    private $addresses;
-    private $bccs;
-    private $ccs;
-    private $template;
+    public $host;
+    public $userName;
+    public $password;
+    public $fromName;
+    public $subject;
+    public $addresses;
+    public $bccs;
+    public $ccs;
+    public $template;
 
     public function __construct( Array $config ){        
         $this->host = $config['host'];

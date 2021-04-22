@@ -10,6 +10,7 @@
     <form  method="post">
         <input type="text" name="name" id="name">
         <button type="submit"><?php echo( _t("otra string") ); ?></button>
+        <?php echo( $content ); ?>
     </form>
 </body>
 </html>

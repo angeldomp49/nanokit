@@ -16,3 +16,13 @@ function rightPath( $resource = "" ){
 function _t( $message ){
     Translation::translate( $message );
 }
+
+function addSettingsFile( $filename ){
+    $settingsName = "app/" . $filename;
+    $settingsFile = rightPath($settingsName);
+
+    if(!file_exists($settingsFile)){
+        throw new Exception("must have $filename file", 1);
+    }
+    include_once($settingsFile);
+}

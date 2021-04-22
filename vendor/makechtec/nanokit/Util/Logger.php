@@ -9,7 +9,7 @@ class Logger {
     }
     public static function logDump( $message ){
         ?>
-            <p><?php echo( var_dump( $message ) ); ?></p>
+            <p><?php var_dump( $message ); ?></p>
         <?php
     }
 

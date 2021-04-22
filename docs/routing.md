@@ -54,3 +54,37 @@ src
 
     http://localhost:8000/home
 
+# Routing with parameters #
+
+Usually you need to send and retrive data from the url. for make this 
+
+1.- Into the __app/routes.php__ declare the route like
+
+    Route::get( 'home/{name}/{lastName}', [ HomeController::class, 'home' ] );
+
+2.- The __{name}__ and __{lastName}__ are the parameters names
+
+3.- Declare your function controller using passing the two parameters
+
+    class HomeController{
+        public function home( $name, $lastName ){
+            $all = $name . " " . $lastName;
+            
+        }
+    }
+
+4.- You can pass values to the view like
+
+    view( 'home', [ 
+        'all'=> $all,
+        'from' => 'Home controller class'
+        ] );
+
+5.- For get the values in the view
+
+    <p> <?php echo( $all ); ?> </p>
+    <p> <?php echo( $from ); ? </p>
+
+6.- Visit the url like this
+
+    http://localhost:8000/home/jhon/Lennon/

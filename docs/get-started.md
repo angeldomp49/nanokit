@@ -122,5 +122,3 @@ Create a template from the specified file and $params
     public String getContent()
 
 The template content in a string
-
-## Routing with params ##

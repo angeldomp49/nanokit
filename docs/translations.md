@@ -25,3 +25,4 @@ not have translation it's displayed normally
     <?php _t( "hello world" ); ?>
 
 6.- Go to your view in the browser ( [starting php development server](https://github.com/angeldomp49/nanokit/blob/docs/docs/get-started) )
+and prove the result

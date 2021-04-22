@@ -106,3 +106,8 @@ from index to composer.json files map
 
 
     hace falta la documentación
+
+IMPORTANT:
+
+Url\Parser must not be initialized because it makes the implementation for rightPath function
+Util\functions.php must be loaded with composer.json because it implements also rightPath function

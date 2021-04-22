@@ -9,7 +9,7 @@
 <body>
     <form  method="post">
         <input type="text" name="name" id="name">
-        <button type="submit">Send</button>
+        <button type="submit"><?php echo( _t("otra string") ); ?></button>
     </form>
 </body>
 </html>

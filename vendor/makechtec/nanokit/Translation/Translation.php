@@ -3,11 +3,17 @@ namespace MakechTec\Nanokit\Translation;
 
 use \SplFileObject;
 use MakechTec\Nanokit\Util\Logger;
+use MakechTec\Nanokit\Core\Kernel;
 
 class Translation{
     public static $lang;
 
     public static function translate( $message ){
+        if( !self::isModuleActive() ){
+            echo( $message );
+            return;
+        }
+
         $currentLang = self::$lang;
         $langFileName = "lang/" . $currentLang . ".json";
         $langFileName = rightPath( $langFileName );
@@ -45,5 +51,9 @@ class Translation{
         }
 
         echo( $message );
+    }
+
+    public static function isModuleActive(){
+        return in_array( "Translation", Kernel::$modules );
     }
 }

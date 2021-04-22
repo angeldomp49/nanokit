@@ -88,3 +88,8 @@ Usually you need to send and retrive data from the url. for make this
 6.- Visit the url like this
 
     http://localhost:8000/home/jhon/Lennon/
+
+7.- You'll see
+
+<p>Jhon Lennon</p>
+<p>Home controller class</p>

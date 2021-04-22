@@ -123,4 +123,4 @@ Create a template from the specified file and $params
 
 The template content in a string
 
-##  ##
+## Routing with params ##

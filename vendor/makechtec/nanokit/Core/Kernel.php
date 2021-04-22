@@ -9,10 +9,13 @@ class Kernel{
     public static $modules;
 
     public static function main(){
-        $site = new Site();
+        
         $modulesFile = rightPath( 'app/modules.php' );
 
         self::openModulesFile( $modulesFile );
+
+        $site = new Site( self::$modules );
+
         self::loadModules( $site );
     }
 

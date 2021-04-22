@@ -7,9 +7,10 @@ use MakechTec\Nanokit\Core\Kernel;
 
 class Translation{
     public static $lang;
+    public static $isActive = false;
 
     public static function translate( $message ){
-        if( !self::isModuleActive() ){
+        if( !self::$isActive ){
             echo( $message );
             return;
         }
@@ -51,9 +52,5 @@ class Translation{
         }
 
         echo( $message );
-    }
-
-    public static function isModuleActive(){
-        return in_array( "Translation", Kernel::$modules );
     }
 }

@@ -23,6 +23,8 @@ class Config implements Initializable{
             $site->lang = DEFAULT_LANGUAGE;
             Translation::$lang = DEFAULT_LANGUAGE;
         }
+
+        Translation::$isActive = true;
     }
 
     public static function isLang( $slug ){

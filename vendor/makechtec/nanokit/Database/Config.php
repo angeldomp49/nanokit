@@ -9,7 +9,6 @@ class Config implements Initializable{
 
     public static function init( Site &$site ){
         addSettingsFile( "dbsettings.php" );
-        include_once($settingsFile);
         $DB = new DB();
 
         $DB->addConnection([

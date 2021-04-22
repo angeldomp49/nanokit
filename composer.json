@@ -1,5 +1,6 @@
 {
     "name": "makechtec/nanokit",
+    "description": "library for php proyects",
     "require":{
         "illuminate/database": "*",
         "phpmailer/phpmailer": "*"

@@ -1,5 +1,5 @@
 <?php
-namespace MakechTec\Nanokit\Database;
+namespace MakechTec\Nanokit\Util;
 
 use MakechTec\Nanokit\Core\Site;
 use MakechTec\Nanokit\Core\Interfaces\Initializable;
@@ -8,7 +8,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 class Config implements Initializable{
 
     public static function init( Site &$site ){
-        $settingsName = "makechtec/nanokit/Util/functions.php";
+        $settingsName = "vendor/makechtec/nanokit/Util/functions.php";
         $settingsFile = rightPath($settingsName);
     
         if(!file_exists($settingsFile)){

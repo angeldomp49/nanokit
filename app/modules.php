@@ -3,6 +3,6 @@
 return $modules = [
     'Util',
     'Translation',
-    'Database',
-    'Routing'
+    'Routing',
+    'Database'
 ];

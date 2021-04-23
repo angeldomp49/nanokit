@@ -13,10 +13,12 @@ class WelcomeController{
 
     public function get(){
         Logger::log( "This is the GET method message" );
+        Logger::log( "The POST name value is not defined" );
     }
 
-    public function post(){
+    public function post( Request $request ){
         Logger::log( "This is the POST method message" );
+        Logger::log("The name value is: " . $request->getPost()['name']);
     }
 
     public function test(){

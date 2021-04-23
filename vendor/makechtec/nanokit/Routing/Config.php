@@ -15,6 +15,7 @@ class Config implements Initializable{
         $classController = $currentRoute->getClassController();
         $methodController = $currentRoute->getMethodController();
         $parameters = $currentRoute->getParameters();
+        $parameters['request'] = $site->getRequest();
 
         $instance = new $classController();
         call_user_func_array( [ $instance, $methodController ], $parameters );

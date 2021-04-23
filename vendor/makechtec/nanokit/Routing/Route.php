@@ -111,7 +111,7 @@ class Route{
 
 
 
-
+    
 
     public function generateParameters(){
         $routeSlugs = Parser::slugsFromUri( $this->getUri() );

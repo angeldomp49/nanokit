@@ -40,6 +40,8 @@ class Request{
     private $time                ;
     private $queryString         ;
 
+    private $post;
+
     public function __construct(){
 
         $this->serverAddress       = ( array_key_exists( 'SERVER_ADDR', $_SERVER  )      && $_SERVER['SERVER_ADDR'] ) ? $_SERVER['SERVER_ADDR'] : null;
@@ -90,9 +92,11 @@ class Request{
 
     public function createMethod(){
         if (!empty($_POST ) && !empty($_POST['method']) ) {
+            $this->post = $_POST;
             return $this->findMethod();
         }
         else if( !empty($_POST ) ){
+            $this->post = $_POST;
             return self::POST;
         }
         else{
@@ -831,4 +835,15 @@ class Request{
         return $this;
     }
 
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    public function setPost($post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
 }

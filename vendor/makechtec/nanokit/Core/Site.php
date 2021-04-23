@@ -17,4 +17,8 @@ class Site{
     public function getModules(){
         return $this->modules;
     }
+
+    public function getRequest(){
+        return $this->request;
+    }
 }

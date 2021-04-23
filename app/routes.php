@@ -7,4 +7,4 @@ Route::get( '/welcome', [ WelcomeController::class, 'test' ] );
 Route::get( '/', [ WelcomeController::class, 'welcome' ] );
 
 Route::get( '/method', [ WelcomeController::class, 'get' ] );
-Route::post( '/method', [ WelcomeController::class, 'post' ] );
+Route::post( '/method/{user}', [ WelcomeController::class, 'post' ] );

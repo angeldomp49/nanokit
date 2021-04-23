@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://localhost:8000/method" method="post">
+    <form action="http://localhost:8000/method/24" method="post">
         <input type="text" name="name" id="name">
         <button type="submit"><?php echo( _t("otra string") ); ?></button>
     </form>

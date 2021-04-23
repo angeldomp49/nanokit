@@ -4,7 +4,7 @@ namespace MakechTec\Nanokit\Routing;
 use \Exception;
 use MakechTec\Nanokit\Url\Parser;
 use MakechTec\Nanokit\Core\Request;
-use MakechTec\Nanokit\Util\logger;
+use MakechTec\Nanokit\Util\Logger;
 
 class Route{
     public const GET = 0;
@@ -86,7 +86,6 @@ class Route{
         $equalMethod = $route->requestType == $request->getMethod();
 
         return ($isEqual && $equalMethod );
-        //return $isEqual;
     }
 
     public static function isBaseUri( $uri ){
@@ -119,10 +118,21 @@ class Route{
 
         $requestSlugs = Parser::slugsFromUri( $this->request->getUri() );
         $paramsValues = array_diff( $requestSlugs, $routeSlugs );
+
+        $numNames = count($paramsNames);
+        $numValues = count($paramsValues);
+
+        if( $numNames > $numValues ){
+            throw new Exception("Route not found more parameters expected for : " . $this->uri . " with method: " . $this->requestType, 1);
+        }
+        else if( $numNames < $numValues ){
+            throw new Exception("Route not found", 1);
+        }
         
         $parameters = array_combine( $paramsNames, $paramsValues );
         $this->setParameters( $parameters );
     }
+
     
 
 

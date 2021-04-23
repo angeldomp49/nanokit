@@ -14,6 +14,7 @@ class Config implements Initializable{
         $mandatoryParameters['request'] = $site->getRequest();
 
         $currentRoute = Route::currentRoute( $site->request );
+        
 
         $classController = $currentRoute->getClassController();
 

@@ -1,15 +1,25 @@
 <?php
 namespace App\Controllers;
 
+use MakechTec\Nanokit\Core\Request;
+use MakechTec\Nanokit\Util\Logger;
+
 class WelcomeController{
     public function welcome(){
-        view( 'welcome', [ 
-            'content' => 'Welcome to Nanokit'
-         ] );
+        $request = new Request();
+        Logger::logDump( $request->getMethod() );
     }
-    public function home(){
-        view( 'welcome', [ 
-            'content' => 'fasddsfsfa'
-         ] );
+
+
+    public function get(){
+        Logger::log( "This is the GET method message" );
+    }
+
+    public function post(){
+        Logger::log( "This is the POST method message" );
+    }
+
+    public function test(){
+        view( 'welcome' );
     }
 }

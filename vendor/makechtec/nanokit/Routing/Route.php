@@ -9,6 +9,7 @@ use MakechTec\Nanokit\Util\logger;
 class Route{
     public const GET = 0;
     public const POST = 1;
+    public const UNDEFINED_METHOD = -1;
 
     private static $routes;
     private static $currentRoute;
@@ -82,8 +83,34 @@ class Route{
         $routeRegex = Parser::createRegexFromRouteUri( $routeUri );
 
         $isEqual = preg_match( $routeRegex, $requestUri );
-        return $isEqual;
+        $equalMethod = $route->requestType == $request->getMethod();
+
+        return ($isEqual && $equalMethod );
+        //return $isEqual;
     }
+
+    public static function isBaseUri( $uri ){
+        $case1 = ( $uri == "" );
+        $case2 = ( $uri == "/" );
+        return ( $case1 || $case2 ) ? true : false ;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function generateParameters(){
@@ -94,16 +121,19 @@ class Route{
         $paramsValues = array_diff( $requestSlugs, $routeSlugs );
         
         $parameters = array_combine( $paramsNames, $paramsValues );
-        $this->setParameters( $parameters);
+        $this->setParameters( $parameters );
     }
-
-    public static function isBaseUri( $uri ){
-        $case1 = ( $uri == "" );
-        $case2 = ( $uri == "/" );
-        return ( $case1 || $case2 ) ? true : false ;
-    }
-
     
+
+
+
+
+
+
+
+
+
+
     public function getUri(){
         return $this->uri;
     }

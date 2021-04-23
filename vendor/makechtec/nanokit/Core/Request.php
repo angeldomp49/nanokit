@@ -3,6 +3,11 @@ namespace MakechTec\Nanokit\Core;
 
 class Request{
 
+    public const GET = 0;
+    public const POST = 1;
+    public const PUT = 2;
+    public const DELETE = 3;
+
     private $serverAddress       ;
     private $serverName          ;
     private $serverSoftware      ;
@@ -69,11 +74,56 @@ class Request{
         $this->origPathInfo        = ( array_key_exists( 'ORIG_PATH_INFO', $_SERVER  )   && $_SERVER['ORIG_PATH_INFO'] ) ? $_SERVER['ORIG_PATH_INFO'] : null; 
         $this->uri                 = ( array_key_exists( 'REQUEST_URI', $_SERVER  )      && $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : null;
         $this->ssl                 = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === true );
-        $this->method              = ( array_key_exists( 'REQUEST_METHOD', $_SERVER  )   && $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : null; 
         $this->time                = ( array_key_exists( 'REQUEST_TIME', $_SERVER  )     && $_SERVER['REQUEST_TIME'] ) ? $_SERVER['REQUEST_TIME'] : null; 
         $this->queryString         = ( array_key_exists( 'QUERY_STRING', $_SERVER  )     && $_SERVER['QUERY_STRING'] ) ? $_SERVER['QUERY_STRING'] : null; 
-
+        $this->method = $this->createMethod();
     }
+
+
+
+
+
+
+
+
+
+
+    public function createMethod(){
+        if (!empty($_POST ) && !empty($_POST['method']) ) {
+            return $this->findMethod();
+        }
+        else if( !empty($_POST ) ){
+            return self::POST;
+        }
+        else{
+            return self::GET;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function getUrl(){
         $url = ($this->getSsl()) ? 'https' : 'http';
@@ -726,25 +776,11 @@ class Request{
         return $this;
     }
 
-
-    /**
-     * Getter for Method
-     *
-     * @return [type]
-     */
-    public function getMethod()
-    {
+    public function getMethod(){
         return $this->method;
     }
 
-    /**
-     * Setter for Method
-     * @var [type] method
-     *
-     * @return self
-     */
-    public function setMethod($method)
-    {
+    public function setMethod($method){
         $this->method = $method;
         return $this;
     }

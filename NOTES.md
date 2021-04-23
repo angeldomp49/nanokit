@@ -111,3 +111,8 @@ IMPORTANT:
 
 Url\Parser must not be initialized because it makes the implementation for rightPath function
 Util\functions.php must be loaded with composer.json because it implements also rightPath function
+
+
+Si no existe metodo se toma GET.
+Los métodos permitidos son sintéticos a excepción de post.
+se requiere que la request sepa su método antes de pasar a la currentRoute ya que es necesario para encontrar su route

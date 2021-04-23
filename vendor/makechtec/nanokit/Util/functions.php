@@ -3,7 +3,7 @@ use MakechTec\Nanokit\Url\Parser;
 use MakechTec\Nanokit\Util\Logger;
 use MakechTec\Nanokit\Translation\Translation;
 
-function view( $name = '', $params = '' ){
+function view( $name = '', $params = [] ){
     extract( $params );
     include( rightPath( 'src/Views/' . $name . '.php' ) );
 }
